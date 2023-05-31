@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+ <RelativeLayout
+     android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     tools:ignore="MissingConstraints" >
+
+    <LinearLayout
+        android:id="@+id/llAudio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
+
+
+    <TextView
+        android:id="@+id/tvAudioRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Audio Recording"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/switchAudio"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="0dp"
+            android:layout_weight="1"
+        />
+
+
+    </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/llCamera"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llAudio"
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvCamera"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Camera"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:textSize="20sp"
+             android:layout_weight="1"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchCamera"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/llGPS"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llCamera"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvGPS"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="GPS"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchGPS"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+
+     <LinearLayout
+         android:id="@+id/llFakeHomeScreen"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llGPS"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvFakeScreen"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Fake Home Screen"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchFakeScreen"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/llDeleteUser_Defined_Activity"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llFakeHomeScreen"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvDelete_traces"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/delete_traces"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchDelete_traces"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/lldayAnalyzer"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llDeleteUser_Defined_Activity"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvDayAnalyzer"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/day_analyzer"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchDayAnalyzer"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/lltextMessageToEmail"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/lldayAnalyzer"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvTextMsg_Email"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/txt_message_forwarding"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchTextMsg_Email"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/llscreenCapture"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/lltextMessageToEmail"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvscreenCapture"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/screen_capture"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchscreenCapture"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/llActivityRecorder"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/llscreenCapture"
+
+         tools:ignore="MissingConstraints">
+
+
+         <TextView
+             android:id="@+id/tvActivityRecorder"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/activity_recorder"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="40dp"
+             android:layout_weight="1"
+             android:textSize="20sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <Switch
+             android:id="@+id/switchActivityRecorder"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+             android:layout_marginLeft="50dp"
+             android:layout_weight="1"
+             />
+
+
+     </LinearLayout>
+
+
+
+
+ </RelativeLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

