@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaRecorder
 import android.util.Log
+import com.example.testriq.day_analyzer_module.DayAnalyzerActivity
 import java.io.IOException
 
 class AudioBoradCastEnd  : BroadcastReceiver() {
@@ -14,41 +15,48 @@ class AudioBoradCastEnd  : BroadcastReceiver() {
     private var endTime: Long = 0
     private lateinit var filePath: String
     override fun onReceive(context: Context?, intent: Intent?) {
-        val action = intent?.action
-        if (action == STOP_RECORDING_ACTION ) {
 
-            // Stop recording audio
-            stopRecording()
-            Log.e("else stop record ","else condition stop record")
-        }
+
+        val closeIntent = Intent(context, DayAnalyzerActivity::class.java)
+        closeIntent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        closeIntent.putExtra("datetimeEnd",myValue)
+        context?.startActivity(closeIntent)
+
+//        val action = intent?.action
+//        if (action == STOP_RECORDING_ACTION ) {
+//
+//            // Stop recording audio
+//            stopRecording()
+//            Log.e("else stop record ","else condition stop record")
+//        }
 //        stopRecording()
 //        Log.e("stop  onrecieve direct ","stop record onrecieve direct")
     }
-    private fun stopRecording() {
-
-        try {
-            Log.d("AudioRecorder endtime1", "End Time: $endTime")
-            mediaRecorder?.stop()
-            Log.d("AudioRecorder endtime2", "End Time: $endTime")
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        }
-//        mediaRecorder?.apply {
-//            stop()
-//            reset()
-//            release()
-//             endTime = System.currentTimeMillis()
-//            val duration = endTime - startTime
-//            Log.d("AudioRecorder", "Start Time: $startTime")
-//            Log.d("AudioRecorder", "End Time: $endTime")
-//            Log.d("AudioRecorder", "Duration: $duration milliseconds")
+//    private fun stopRecording() {
+//
+//        try {
+//            Log.d("AudioRecorder endtime1", "End Time: $endTime")
+//            mediaRecorder?.stop()
+//            Log.d("AudioRecorder endtime2", "End Time: $endTime")
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        } catch (e: IllegalStateException) {
+//            e.printStackTrace()
 //        }
-//        isRecording = false
-    }
-    companion object {
-        const val START_RECORDING_ACTION = "com.example.testriq.START_RECORDING"
-        const val STOP_RECORDING_ACTION = "com.example.testriq.STOP_RECORDING"
-    }
+////        mediaRecorder?.apply {
+////            stop()
+////            reset()
+////            release()
+////             endTime = System.currentTimeMillis()
+////            val duration = endTime - startTime
+////            Log.d("AudioRecorder", "Start Time: $startTime")
+////            Log.d("AudioRecorder", "End Time: $endTime")
+////            Log.d("AudioRecorder", "Duration: $duration milliseconds")
+////        }
+////        isRecording = false
+//    }
+//    companion object {
+//        const val START_RECORDING_ACTION = "com.example.testriq.START_RECORDING"
+//        const val STOP_RECORDING_ACTION = "com.example.testriq.STOP_RECORDING"
+//    }
 }
