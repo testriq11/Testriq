@@ -244,7 +244,7 @@ class AudioRecording : AppCompatActivity() {
 //        sendBroadcast(startRecordingIntent)
 
 //        val intent = Intent(context, AudioBroadCast::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, startRecordingIntent, ALARAM_REQ_CODE)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, startRecordingIntent,PendingIntent.FLAG_IMMUTABLE)
         alarmManager.set(AlarmManager.RTC_WAKEUP, dateTime.time, pendingIntent)
         Log.e(" dateTimeEnd.time", dateTime.time.toString() )
 
@@ -255,7 +255,7 @@ class AudioRecording : AppCompatActivity() {
 //        val stopRecordingIntent = Intent(AudioBroadCast.STOP_RECORDING_ACTION)
 //        sendBroadcast(stopRecordingIntent)
 
-        val pendingIntentStop = PendingIntent.getBroadcast(context, 1,  stopRecordingIntent, ALARAM_REQ_CODE_END)
+        val pendingIntentStop = PendingIntent.getBroadcast(context, 1,  stopRecordingIntent,PendingIntent.FLAG_IMMUTABLE)
         alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeEnd.time, pendingIntentStop)
         Log.e(" dateTimeEnd.time", dateTimeEnd.time.toString() )
 
