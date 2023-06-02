@@ -4,12 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.testriq.databinding.ItemAppBinding
 import com.example.testriq.model.App
 
-class AppAdapter(private val context: Context, var appList: List<App>) :
+class AppAdapter(private val appList: List<App>) :
     RecyclerView.Adapter<AppAdapter.AppViewHolder>() {
 
     private val selectedItems =  mutableListOf<App>()
@@ -18,7 +16,7 @@ class AppAdapter(private val context: Context, var appList: List<App>) :
 
     private var binding: ItemAppBinding? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
-       binding = ItemAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AppViewHolder(binding!!)
     }
 
@@ -64,13 +62,16 @@ class AppAdapter(private val context: Context, var appList: List<App>) :
 //           }
 //           }
 
-        val item = appList[position]
-        holder.binding.cbItem.isChecked = item.isSelected
-        val packageManager = context.packageManager
-        val appIcon = packageManager.getApplicationIcon(item.packageName)
-        holder.binding.tvAppname.text=item.name
-        binding?.ivApp?.setImageDrawable(appIcon)
+//        val item = appList[position]
+//        holder.binding.cbItem.isChecked = item.isSelected
+//        val packageManager = context.packageManager
+//        val appIcon = packageManager.getApplicationIcon(item.packageName)
 
+//        holder.binding.tvAppname.text=item.name
+
+        val app = appList[position]
+        holder.binding.ivApp.setImageDrawable(app.icon)
+        holder.bind(app)
 
     }
 
@@ -82,24 +83,24 @@ class AppAdapter(private val context: Context, var appList: List<App>) :
     inner class AppViewHolder( val binding: ItemAppBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        init {
-            binding.cbItem.setOnClickListener {
-                val item = appList[position]
-                item.isSelected = binding.cbItem.isChecked
-
-                if (item.isSelected) {
-                    selectedItems.add(item)
-                } else {
-                    selectedItems.remove(item)
+        fun bind(app: App) {
+            binding.apply {
+//                val item = appList[position]
+//                        val packageManager = context.packageManager
+//        val appIcon = packageManager.getApplicationIcon(item.packageName!!)
+                cbItem.isChecked = app.isSelected
+               cbItem.text = app.name
+                ivApp.setImageDrawable(ivApp.drawable)
+                cbItem.setOnCheckedChangeListener { _, isChecked ->
+                    app.isSelected = isChecked
                 }
             }
-        }
-        }
+    }
 
     // Delete selected items
-    fun deleteSelectedItems() {
-        appList.removeAll(selectedItems)
-        selectedItems.clear()
-        notifyDataSetChanged()
-    }
-}
+//    fun deleteSelectedItems() {
+//        appList.removeAll(selectedItems)
+//        selectedItems.clear()
+//        notifyDataSetChanged()
+//    }
+}}

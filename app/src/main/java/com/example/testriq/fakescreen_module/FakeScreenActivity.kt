@@ -6,18 +6,19 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testriq.adapter.AppAdapter
 import com.example.testriq.databinding.ActivityFakeScreenBinding
 import com.example.testriq.model.App
-import com.google.android.material.snackbar.Snackbar
 
 
 class FakeScreenActivity : AppCompatActivity() {
@@ -31,6 +32,7 @@ class FakeScreenActivity : AppCompatActivity() {
     private lateinit var keyguardManager: KeyguardManager
     private lateinit var devicePolicyManager: DevicePolicyManager
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,26 +45,45 @@ class FakeScreenActivity : AppCompatActivity() {
 //        appAdapter = AppAdapter(appList)
 //        binding.appRecyclerView.adapter = appAdapter
 //        deletedApps = mutableListOf()
-          appList=displayInstalledApps()
+//        appList=displayInstalledApps()
+
+
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 //
 //        // pass it to rvLists layoutManager
         binding.appRecyclerView.setLayoutManager(layoutManager)
+        val installedApps = getInstalledApps().map { appInfo ->
+//            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName)
+            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName,appInfo.loadIcon(packageManager),isSelected = false)
+        }
 
+        val adapter = AppAdapter(installedApps)
+        Log.e("ins>>",installedApps.toString())
+        binding.appRecyclerView.adapter = adapter
         // initialize the adapter,
-        // and pass the required argument
-        appAdapter = AppAdapter(context , appList as MutableList<App>)
+//        // and pass the required argument
+//        appAdapter = AppAdapter(context , appList as MutableList<App>)
 
         // attach adapter to the recycler view
-        binding.appRecyclerView.adapter = appAdapter
+//        binding.appRecyclerView.adapter = appAdapter
 
         requestDeviceAdmin()
 
-        binding.btnDelete.setOnClickListener {
-//            appAdapter.deleteSelectedItems()
+//        binding.btnDelete.setOnClickListener {
+////            appAdapter.deleteSelectedItems()
+//        }
+
+        binding.btnSend.setOnClickListener {
+            val selectedApps = installedApps.filter { it.isSelected }
+            val intent = Intent(this, FakeHomeScreen::class.java)
+            intent.putExtra("selectedApps", ArrayList(selectedApps))
+            startActivity(intent)
         }
     }
-
+    private fun getInstalledApps(): List<ApplicationInfo> {
+        val packageManager = packageManager
+        return packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+    }
     private fun requestDeviceAdmin() {
         val componentName = ComponentName(this, MyDeviceAdminReceiver::class.java)
         val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
@@ -122,45 +143,45 @@ class FakeScreenActivity : AppCompatActivity() {
 
 //         Disable the keyguard and set the lock task mode
 //        devicePolicyManager.setKeyguardDisabled(componentName, true)
-      //  devicePolicyManager.setLockTaskPackages(componentName, arrayOf(packageName))
+        //  devicePolicyManager.setLockTaskPackages(componentName, arrayOf(packageName))
 
         // Start the lock task mode
         startLockTask()
     }
 
-    private fun displayInstalledApps(): List<App> {
-
-
-
-        val packageManager = applicationContext.packageManager
-        val installedApps = mutableListOf<App>()
-
-        val packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
-        for (appInfo in packages) {
-            val appName = appInfo.loadLabel(packageManager).toString()
-            val packageName = appInfo.packageName
-            val appIcon = appInfo.loadIcon(packageManager)
-
-            val app = App(appName, packageName, appIcon)
-            installedApps.add(app)
-            Log.d("InstalledApp", appName)
-        }
-////        val packageManager = packageManager
-////        val installedApps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+//    private fun displayInstalledApps(): List<App> {
 //
-////        appList = listOf(App())
+//
+//
+//        val packageManager = applicationContext.packageManager
+//        val installedApps = mutableListOf<App>()
+//
+//        val packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+//        for (appInfo in packages) {
+//            val appName = appInfo.loadLabel(packageManager).toString()
+//            val packageName = appInfo.packageName
+////            val appIcon = appInfo.loadIcon(packageManager)
 ////
-////        for (appInfo in installedApps) {
-////            appNames.add(appInfo.loadLabel(packageManager).toString())
-////        }
+////            val app = App(appName, packageName)
+//            installedApps.add(app)
+//            Log.d("InstalledApp", appName)
+//        }
+//////        val packageManager = packageManager
+//////        val installedApps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
 ////
-////        // Now you can use appNames to populate your list view or perform any other operations
-////        // For example, you can log the names of the installed apps:
-////        for (appName in appNames) {
-////            Log.d("InstalledApp", appName)
-////        }
-return installedApps
-    }
+//////        appList = listOf(App())
+//////
+//////        for (appInfo in installedApps) {
+//////            appNames.add(appInfo.loadLabel(packageManager).toString())
+//////        }
+//////
+//////        // Now you can use appNames to populate your list view or perform any other operations
+//////        // For example, you can log the names of the installed apps:
+//////        for (appName in appNames) {
+//////            Log.d("InstalledApp", appName)
+//////        }
+//        return installedApps
+//    }
 
 //    private fun deleteSelectedApps() {
 //        deletedApps.clear()

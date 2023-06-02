@@ -24,14 +24,14 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_launcher_background" />
 
-        <TextView
-            android:id="@+id/tvAppname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-           android:hint="text"
-            android:textSize="16sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvAppname"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--           android:hint="text"-->
+<!--            android:textSize="16sp" />-->
 
         <CheckBox
             android:id="@+id/cbItem"

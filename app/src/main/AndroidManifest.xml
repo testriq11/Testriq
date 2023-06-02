@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera.any" />
-    <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN"
+
+    <uses-permission
+        android:name="android.permission.BIND_DEVICE_ADMIN"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -21,7 +23,8 @@
         android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.REORDER_TASKS" />
@@ -36,6 +39,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Testriq"
         tools:targetApi="31">
+        <activity
+            android:name=".fakescreen_module.FakeHomeScreen"
+            android:exported="false" />
         <activity
             android:name=".activity_recorder_module.ActivityRecorderActivity"
             android:exported="false" />
@@ -98,11 +104,11 @@
             android:exported="false" />
 
         <receiver
-            android:name="com.example.testriq.fakescreen_module.MyDeviceAdminReceiver"
+            android:name=".MyDeviceAdminReceiver"
             android:description="@string/app_name"
+            android:exported="true"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_DEVICE_ADMIN"
-            android:exported="true">
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin_receiver" />
@@ -111,7 +117,6 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
