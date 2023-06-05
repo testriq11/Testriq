@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.testriq.databinding.ItemAppBinding
 import com.example.testriq.model.App
+import com.squareup.picasso.Picasso
 
 class AppAdapter(private val appList: List<App>) :
     RecyclerView.Adapter<AppAdapter.AppViewHolder>() {
@@ -70,8 +72,11 @@ class AppAdapter(private val appList: List<App>) :
 //        holder.binding.tvAppname.text=item.name
 
         val app = appList[position]
-        holder.binding.ivApp.setImageDrawable(app.icon)
-        holder.bind(app)
+        holder.binding.ivApp.setImageBitmap(app.icon)
+//        Picasso.get()
+//            .load(app.icon.toString())
+//            .into(binding?.ivApp)
+          holder.bind(app)
 
     }
 
@@ -91,6 +96,15 @@ class AppAdapter(private val appList: List<App>) :
                 cbItem.isChecked = app.isSelected
                cbItem.text = app.name
                 ivApp.setImageDrawable(ivApp.drawable)
+//                Glide.with(binding.ivApp.context)
+//                    .load(app)
+//                    .into(binding.ivApp)
+//                Picasso.get()
+//                    .load(app.icon.toString())
+//                    .into(binding?.ivApp)
+
+
+
                 cbItem.setOnCheckedChangeListener { _, isChecked ->
                     app.isSelected = isChecked
                 }

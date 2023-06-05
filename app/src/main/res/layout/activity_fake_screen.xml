@@ -5,6 +5,7 @@
     android:id="@+id/clFakeScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".fakescreen_module.FakeScreenActivity">
 
 
@@ -27,7 +28,7 @@
         android:layout_below="@+id/appRecyclerView"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Send"
+        android:text="Set Selected App"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

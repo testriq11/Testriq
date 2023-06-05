@@ -8,12 +8,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testriq.adapter.AppAdapter
@@ -52,11 +56,22 @@ class FakeScreenActivity : AppCompatActivity() {
 //
 //        // pass it to rvLists layoutManager
         binding.appRecyclerView.setLayoutManager(layoutManager)
-        val installedApps = getInstalledApps().map { appInfo ->
-//            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName)
-            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName,appInfo.loadIcon(packageManager),isSelected = false)
+//        val installedApps = getInstalledApps().map { appInfo ->
+////            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName)
+//            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName,appInfo.loadIcon(packageManager).toBitmap(),
+//                isSelected = false)
+//        }
+
+        val filteredApps = getInstalledApps().filter { appInfo ->
+            appInfo.icon != 0
         }
 
+        val installedApps = filteredApps.map { appInfo ->
+            App(appInfo.loadLabel(packageManager).toString(),appInfo.packageName,appInfo.loadIcon(packageManager).toBitmap(),
+                isSelected = false)
+        }
+
+        //appInfo.loadIcon(packageManager)
         val adapter = AppAdapter(installedApps)
         Log.e("ins>>",installedApps.toString())
         binding.appRecyclerView.adapter = adapter
@@ -77,6 +92,7 @@ class FakeScreenActivity : AppCompatActivity() {
             val selectedApps = installedApps.filter { it.isSelected }
             val intent = Intent(this, FakeHomeScreen::class.java)
             intent.putExtra("selectedApps", ArrayList(selectedApps))
+
             startActivity(intent)
         }
     }
@@ -91,6 +107,22 @@ class FakeScreenActivity : AppCompatActivity() {
         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Please grant device admin permission")
         startActivityForResult(intent, DEVICE_ADMIN_REQUEST_CODE)
     }
+    fun loadIcon(packageManager: PackageManager): Bitmap {
+        // Load the icon using the package manager
+        val iconDrawable = packageManager.getApplicationIcon(packageName)
+
+        // Convert the Drawable to a Bitmap
+        val bitmap = Bitmap.createBitmap(
+            iconDrawable.intrinsicWidth,
+            iconDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        iconDrawable.setBounds(0, 0, canvas.width, canvas.height)
+        iconDrawable.draw(canvas)
+
+        return bitmap
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -104,6 +136,17 @@ class FakeScreenActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun convertDrawableToBitmap(drawable: Drawable): Bitmap {
+        val width = drawable.intrinsicWidth
+        val height = drawable.intrinsicHeight
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, width, height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
 
     private fun freezeHomeScreen() {
         // Disable keyguard

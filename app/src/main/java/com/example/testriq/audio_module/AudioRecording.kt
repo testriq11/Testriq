@@ -293,7 +293,7 @@ class AudioRecording : AppCompatActivity() {
             if (deleted) {
                 Toast.makeText(this,"Folder Deleted Succesfully",Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this,"Failed to  Deleted Succesfully",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Failed to  Deleted Folder",Toast.LENGTH_LONG).show()
             }
         } else {
             Toast.makeText(this,"Folder Doesn't Exist",Toast.LENGTH_LONG).show()

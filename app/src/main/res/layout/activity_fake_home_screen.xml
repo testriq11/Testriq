@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_500"
     tools:context=".fakescreen_module.FakeHomeScreen">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectedItemsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
         android:padding="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
