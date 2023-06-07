@@ -4,6 +4,7 @@
     <string name="edt_qty"> Enter Photo Qty </string>
     <string name="btn"> Click to Set </string>
     <string name="record">Record</string>
+
     <string name="play">Play</string>
     <string name="list">List of recordings</string>
     <string name="enterAudioName">Enter Audio Name</string>
@@ -27,6 +28,8 @@
     <string name="txt_message_forwarding">Text message forwarding to email </string>
     <string name="screen_capture">Screen capture as per user-defined schedule</string>
     <string name="activity_recorder">Activity Recorder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

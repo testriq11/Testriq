@@ -11,8 +11,47 @@
         android:id="@+id/selectedItemsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        android:padding="16dp" />
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectedItemsRecyclerView"
+        tools:layout_editor_absoluteX="16dp">
+
+        <ImageView
+            android:id="@+id/ivCheckbox"
+            android:layout_marginLeft="45dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_check_box_outline_blank_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/ivCircle"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_circle_24"></ImageView>
+
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_marginRight="45dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_arrow_back_ios_24"></ImageView>
+
+
+
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
