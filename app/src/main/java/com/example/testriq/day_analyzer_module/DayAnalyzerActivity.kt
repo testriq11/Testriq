@@ -43,8 +43,12 @@ class DayAnalyzerActivity : AppCompatActivity() {
             val callintent= Intent(context,CallActivity::class.java)
             startActivity(callintent)
         }
+        binding.llLocations.setOnClickListener {
 
-//
+            val locationintent= Intent(context,LocationActivity::class.java)
+            startActivity(locationintent)
+        }
+
 //
 //        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 //        val tabLayout = binding.tabLayout

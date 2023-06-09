@@ -339,7 +339,7 @@ class AutoClickCamera : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     takePhoto()
 
-                }, 20000)
+                }, 30000)
                 Toast.makeText(context,"Image Saved in Folder",Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Log.d(TAG, "Use case binding failed")

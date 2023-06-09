@@ -79,14 +79,14 @@ class CallActivity : AppCompatActivity() {
         adapter.setData(callList)
     }
 
-    private fun getCallType(callTypeCode: Int): String {
-        return when (callTypeCode) {
-            CallLog.Calls.INCOMING_TYPE -> "Incoming"
-            CallLog.Calls.OUTGOING_TYPE -> "Outgoing"
-            CallLog.Calls.MISSED_TYPE -> "Missed"
-            else -> "Unknown"
-        }
-    }
+//    private fun getCallType(callTypeCode: Int): String {
+//        return when (callTypeCode) {
+//            CallLog.Calls.INCOMING_TYPE -> "Incoming"
+//            CallLog.Calls.OUTGOING_TYPE -> "Outgoing"
+//            CallLog.Calls.MISSED_TYPE -> "Missed"
+//            else -> "Unknown"
+//        }
+//    }
 //    private fun showDatePicker() {
 //        val datePickerDialog = DatePickerDialog(
 //            this,
