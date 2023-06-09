@@ -6,93 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".day_analyzer_module.DayAnalyzerActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-  />
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+      android:textStyle="bold"
+        android:textSize="30sp"
+        android:text="@string/day_analyzer">
+    </TextView>
+<LinearLayout
+    android:id="@+id/llMessages"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:background="@drawable/edittext_bg"
+    tools:ignore="MissingConstraints">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:text="@string/message">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    </TextView>
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llCalls"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-    />
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/edittext_bg"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/tvCalls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:text="@string/calls">
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginVertical="@dimen/tenDp"-->
-<!--        android:focusable="true"-->
-<!--        android:text="@string/day_analyzer"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="24sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        </TextView>
 
-
-<!--    <Switch-->
-<!--        android:id="@+id/switchAudio"-->
-<!--        android:layout_width="310dp"-->
-<!--        android:layout_height="6dp"-->
-
-<!--        android:layout_marginTop="30dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+    </LinearLayout>
 
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/llDateRange"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/switchAudio"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:layout_editor_absoluteX="-21dp">-->
+    <LinearLayout
+        android:id="@+id/llLocations"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
 
-<!--        <ImageView-->
-<!--            android:id="@+id/btnDatePicker"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/baseline_calendar_month_24"-->
-<!--            android:text="Select Date Range" />-->
+        android:background="@drawable/edittext_bg"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/tvLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:text="@string/locations">
 
-<!--        <TextView-->
-<!--            android:id="@+id/tvSelectedDateRange"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:text="Selected Date Range: " />-->
+        </TextView>
 
-<!--    </LinearLayout>-->
+    </LinearLayout>
 
 
 
 
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rvDayAnalyzer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
+</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginStart="0dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="21dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/llDateRange"-->
-<!--        tools:ignore="MissingConstraints" />-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

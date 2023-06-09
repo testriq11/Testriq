@@ -25,6 +25,10 @@
     <string name="fake_screen">Fake Screen</string>
     <string name="delete_traces">Delete all traces of user-defined activity</string>
     <string name="day_analyzer">Day Analyzer</string>
+    <string name="message">Message</string>
+    <string name="calls">Calls</string>
+    <string name="locations">Locations</string>
+
     <string name="txt_message_forwarding">Text message forwarding to email </string>
     <string name="screen_capture">Screen capture as per user-defined schedule</string>
     <string name="activity_recorder">Activity Recorder</string>

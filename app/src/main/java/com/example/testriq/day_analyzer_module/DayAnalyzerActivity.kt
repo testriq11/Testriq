@@ -2,6 +2,7 @@ package com.example.testriq.day_analyzer_module
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -23,32 +24,48 @@ import java.util.*
 
 class DayAnalyzerActivity : AppCompatActivity() {
     lateinit var binding:ActivityDayAnalyzerBinding
+    val context=this
     private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDayAnalyzerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        val tabLayout = binding.tabLayout
-        val viewPager = binding.viewPager
+
+        binding.llMessages.setOnClickListener {
+
+            val messageintent= Intent(context,MessageActivity::class.java)
+            startActivity(messageintent)
+        }
+
+        binding.llCalls.setOnClickListener {
+
+            val callintent= Intent(context,CallActivity::class.java)
+            startActivity(callintent)
+        }
+
+//
+//
+//        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+//        val tabLayout = binding.tabLayout
+//        val viewPager = binding.viewPager
 
         // Setup the ViewPager with an adapter
-        viewPager.adapter = DayAnalyzerPagerAdapter(supportFragmentManager)
+//        viewPager.adapter = DayAnalyzerPagerAdapter(supportFragmentManager)
 
         // Connect the TabLayout with the ViewPager
-        tabLayout.setupWithViewPager(viewPager)
+//        tabLayout.setupWithViewPager(viewPager)
 //
-//        // pass it to rvLists layoutManager
+////        // pass it to rvLists layoutManager
 //        binding.rvDayAnalyzer.setLayoutManager(layoutManager)
 //        val smsMessages = fetchSMSMessages()
 //        val adapter = SMSAdapter(smsMessages)
 //        binding.rvDayAnalyzer.adapter = adapter
 
-        sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
-
-
-////        binding.btnDatePicker.setOnClickListener {
+//        sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
+//
+//
+//        binding.btnDatePicker.setOnClickListener {
 //            showDatePicker()
 //        }
 //        fetchSmsData()
@@ -75,7 +92,7 @@ class DayAnalyzerActivity : AppCompatActivity() {
 //
 //        datePicker.show(supportFragmentManager, "datePicker")
 //    }
-
+//
 //    fun fetchSMSMessages(startDate: Date, endDate: Date): List<SMSMessage> {
 //        val messages = mutableListOf<SMSMessage>()
 //        val selection = "date BETWEEN ${startDate.time} AND ${endDate.time}"
@@ -107,7 +124,7 @@ class DayAnalyzerActivity : AppCompatActivity() {
 //
 //        return messages
 //    }
-
+//
 //    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 //        TODO("Not yet implemented")
 //    }

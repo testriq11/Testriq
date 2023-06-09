@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.REPLACE_LAUNCHER"
+    <uses-permission
+        android:name="android.permission.REPLACE_LAUNCHER"
         tools:ignore="ProtectedPermissions" />
+
     <uses-feature android:name="android.hardware.camera.any" />
-<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission
         android:name="android.permission.BIND_DEVICE_ADMIN"
         tools:ignore="ProtectedPermissions" />
@@ -30,8 +34,11 @@
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.REORDER_TASKS" />
-    <uses-permission android:name="android.permission.WRITE_SMS"
+    <uses-permission
+        android:name="android.permission.WRITE_SMS"
         tools:ignore="ProtectedPermissions,SystemPermissionTypo" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -42,6 +49,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Testriq"
         tools:targetApi="31">
+        <activity
+            android:name=".day_analyzer_module.CallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".day_analyzer_module.MessageActivity"
+            android:exported="false" />
         <activity
             android:name=".fakescreen_module.FakeHomeScreen"
             android:exported="false" />
@@ -88,7 +101,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

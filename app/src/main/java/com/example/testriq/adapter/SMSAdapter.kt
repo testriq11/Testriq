@@ -1,5 +1,6 @@
 package com.example.testriq.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class SMSAdapter(private val messages: List<SMSMessage>) :
     class SMSViewHolder(val binding: ItemSmsBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
+        @SuppressLint("SuspiciousIndentation")
         fun bind(message: SMSMessage) {
           binding.messageTextView.text = "Message :${message.body}"
             binding.messageTextView.setTypeface(null, Typeface.BOLD)
