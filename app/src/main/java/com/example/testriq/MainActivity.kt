@@ -13,7 +13,7 @@ import com.example.testriq.delete_userdefined_traces_module.DeleteTracesActivity
 import com.example.testriq.fakescreen_module.FakeScreenActivity
 import com.example.testriq.gps_module.GpsActivity
 import com.example.testriq.screen_capture_module.ScreenCaptureActivity
-import com.example.testriq.text_to_email.TextForwardEmailActivity
+import com.example.testriq.screen_capture_module.text_to_email.TextForwardEmailActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvTextMsgEmail.setOnClickListener  {
-            val intent= Intent(this,TextForwardEmailActivity::class.java)
+            val intent= Intent(this, TextForwardEmailActivity::class.java)
             startActivity(intent)
         }
 
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
             if (isChecked){
 
-                val intent= Intent(this,TextForwardEmailActivity::class.java)
+                val intent= Intent(this, TextForwardEmailActivity::class.java)
                 startActivity(intent)
             }
             else{

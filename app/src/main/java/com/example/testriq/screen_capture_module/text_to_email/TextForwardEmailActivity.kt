@@ -1,4 +1,4 @@
-package com.example.testriq.text_to_email
+package com.example.testriq.screen_capture_module.text_to_email
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

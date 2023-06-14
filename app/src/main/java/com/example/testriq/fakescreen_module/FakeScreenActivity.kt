@@ -129,7 +129,7 @@ class FakeScreenActivity : AppCompatActivity() {
         if (requestCode == DEVICE_ADMIN_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 // Device admin permission granted
-                freezeHomeScreen()
+//                freezeHomeScreen()
             } else {
                 // Device admin permission denied
                 // Handle accordingly
@@ -148,49 +148,49 @@ class FakeScreenActivity : AppCompatActivity() {
     }
 
 
-    private fun freezeHomeScreen() {
-        // Disable keyguard
-        window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
-
-        // Set lock task mode if the device is running Android 5.0 or higher
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-
-            if (!keyguardManager.isKeyguardLocked) {
-                startLockTask()
-            } else {
-                // Request device admin permission to set lock task mode
-//                val intent = devicePolicyManager.createConfirmDeviceCredentialIntent(
-//                    null,
-//                    null
-//                )
-
-                startActivityForResult(intent, 6)
-            }
-        }
-//        val devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-//        val componentName = ComponentName(this, MyDeviceAdminReceiver::class.java)
-//        val dpm = getSystemService(DEVICE_POLICY_SERVICE) as DevicePolicyManager
-//        val isProfileOwner = dpm.isProfileOwnerApp("com.example.testriq")
-//        val isDeviceOwner = dpm.isDeviceOwnerApp("com.example.testriq")
+//    private fun freezeHomeScreen() {
+//        // Disable keyguard
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
 //
-////        val adminComponent = ComponentName(context, MyDeviceAdminReceiver::class.java)
-//        val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-//        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
-//        startActivityForResult(intent, 45)
-//        intent.putExtra(
-//            DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-//            "Please enable device admin access."
-//        )
-
-//         Disable the keyguard and set the lock task mode
-//        devicePolicyManager.setKeyguardDisabled(componentName, true)
-        //  devicePolicyManager.setLockTaskPackages(componentName, arrayOf(packageName))
-
-        // Start the lock task mode
-        startLockTask()
-    }
+//        // Set lock task mode if the device is running Android 5.0 or higher
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+//            devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+//
+//            if (!keyguardManager.isKeyguardLocked) {
+//                startLockTask()
+//            } else {
+//                // Request device admin permission to set lock task mode
+////                val intent = devicePolicyManager.createConfirmDeviceCredentialIntent(
+////                    null,
+////                    null
+////                )
+//
+//                startActivityForResult(intent, 6)
+//            }
+//        }
+////        val devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+////        val componentName = ComponentName(this, MyDeviceAdminReceiver::class.java)
+////        val dpm = getSystemService(DEVICE_POLICY_SERVICE) as DevicePolicyManager
+////        val isProfileOwner = dpm.isProfileOwnerApp("com.example.testriq")
+////        val isDeviceOwner = dpm.isDeviceOwnerApp("com.example.testriq")
+////
+//////        val adminComponent = ComponentName(context, MyDeviceAdminReceiver::class.java)
+////        val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
+////        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
+////        startActivityForResult(intent, 45)
+////        intent.putExtra(
+////            DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+////            "Please enable device admin access."
+////        )
+//
+////         Disable the keyguard and set the lock task mode
+////        devicePolicyManager.setKeyguardDisabled(componentName, true)
+//        //  devicePolicyManager.setLockTaskPackages(componentName, arrayOf(packageName))
+//
+//        // Start the lock task mode
+//        startLockTask()
+//    }
 
 //    private fun displayInstalledApps(): List<App> {
 //
