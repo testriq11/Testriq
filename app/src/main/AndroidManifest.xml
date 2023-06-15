@@ -31,8 +31,6 @@
     <uses-permission
         android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"
         tools:ignore="ProtectedPermissions" />
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -54,6 +52,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Testriq"
         tools:targetApi="31">
+        <activity
+            android:name=".day_analyzer_module.MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".day_analyzer_module.AllLocationActivity"
+            android:exported="false" />
         <activity
             android:name=".day_analyzer_module.LocationActivity"
             android:exported="false" />
@@ -127,7 +131,6 @@
                 <action android:name="com.example.testriq.STOP_RECORDING" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".Broadcast.LocationReceiver"
             android:enabled="true"
@@ -136,8 +139,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-
 
         <service
             android:name=".audio_module.AudioRecordingService"
@@ -164,11 +165,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAjXp_iIVbgmlg6c2eqq6L5ACgJr-p4pRc"
-            >
-
-
-        </meta-data>
+            android:value="AIzaSyAjXp_iIVbgmlg6c2eqq6L5ACgJr-p4pRc" />
     </application>
 
 </manifest>

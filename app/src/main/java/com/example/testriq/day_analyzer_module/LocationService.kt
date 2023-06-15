@@ -1,6 +1,5 @@
 package com.example.testriq.day_analyzer_module
 
-import android.Manifest
 import android.annotation.SuppressLint
 
 import com.google.android.gms.location.*
@@ -11,12 +10,9 @@ import kotlinx.coroutines.launch
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.room.Room
 import com.example.testriq.day_analyzer_module.dao.TraceLocationDao
 import com.example.testriq.day_analyzer_module.db.LocationDatabase
@@ -192,7 +188,7 @@ class LocationService : Service(),OnMapReadyCallback {
 
                         Log.e("longi>>", longitude.toString())
                         // Get the user's location using Google Maps API or location provider
-                        var eventID: Long = 0
+                        var eventID: Int = 0
                         val timestamp = System.currentTimeMillis()
                         val locationEntity = TraceLocation(eventID, latitude, longitude, timestamp)
                         GlobalScope.launch(Dispatchers.IO) {
