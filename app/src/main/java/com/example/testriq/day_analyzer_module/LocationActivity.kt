@@ -1,31 +1,19 @@
 package com.example.testriq.day_analyzer_module
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.app.Service
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.room.Room
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
-import com.example.testriq.Broadcast.LocationReceiver
 import com.example.testriq.R
-
 import com.example.testriq.databinding.ActivityLocationBinding
+
+
 import com.example.testriq.day_analyzer_module.dao.TraceLocationDao
 import com.example.testriq.day_analyzer_module.db.LocationDatabase
 import com.example.testriq.day_analyzer_module.model.TraceLocation
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
@@ -37,8 +25,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
-class LocationActivity : AppCompatActivity(), MapReadyCallback {
-//class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
+//class LocationActivity : AppCompatActivity(), MapReadyCallback {
+class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    companion object {
+        const val EXTRA_LATITUDE = "extra_latitude"
+        const val EXTRA_LONGITUDE = "extra_longitude"
+        const val TIME_MAP = "extra_time"
+    }
+
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private lateinit var database: LocationDatabase
@@ -53,7 +48,14 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//
+
+        // Retrieve the latitude and longitude values from the intent
+        val latitude = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
+        val longitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
+        val timeMap = intent.getLongExtra(TIME_MAP, 0L)
+        Log.e("loc_latitude",latitude.toString())
+        Log.e("loc_longitude",longitude.toString())
+        Log.e("loc_time",timeMap.toString())
 //        val intent=Intent(context,LocationService::class.java)
 //        ContextCompat.startForegroundService(this,intent)
         // Initialize the Room database
@@ -62,11 +64,11 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
 //                .build()
 
 
-        val intent = Intent(this, LocationService::class.java)
-        startService(intent)
-        val service = LocationService()
-        service.setMapReadyCallback(context)
-        service.onMapReady(googleMap)
+//        val intent = Intent(this, LocationService::class.java)
+//        startService(intent)
+//        val service = LocationService()
+//        service.setMapReadyCallback(context)
+//        service.onMapReady(googleMap)
 
 
 
@@ -74,9 +76,9 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
 //        mapView = findViewById(R.id.mapView)
 //        mapView.onCreate(savedInstanceState)
 //        mapView.getMapAsync(this)
-//        val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
-//        client = LocationServices.getFusedLocationProviderClient(this)
+        val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        client = LocationServices.getFusedLocationProviderClient(this)
 //        mapView = findViewById(R.id.mapView)
 //        mapView.onCreate(savedInstanceState)
 //        mapView.getMapAsync(context)
@@ -85,6 +87,16 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
         Timer().schedule(0, 10000) {
 //            saveMapDataToDatabase()
         }
+
+        binding.btnListAllLocation.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+            val locationList = locationDao.getAll()
+
+            val intent = Intent(context, AllLocationActivity::class.java)
+//            intent.putParcelableArrayListExtra("itemList", ArrayList(itemList))
+            intent.putExtra("locationList", ArrayList(locationList))
+            startActivity(intent)
+        } }
     }
 
 //    @SuppressLint("MissingPermission")
@@ -94,7 +106,7 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
 //
 //    }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "SuspiciousIndentation")
 //    override fun onPause() {
 //        super.onPause()
 //        mapView.onPause()
@@ -167,7 +179,7 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
 
         // Perform any map-related operations here
         val map: GoogleMap? = googlemap
-        Timer().schedule(0, 10000) {
+        Timer().schedule(0, 60000) {
             client.lastLocation.addOnCompleteListener {
                 locationDatabase = Room.databaseBuilder(
                     applicationContext,
@@ -204,7 +216,7 @@ class LocationActivity : AppCompatActivity(), MapReadyCallback {
 
                         Log.e("longi>>", longitude.toString())
                         // Get the user's location using Google Maps API or location provider
-                        var eventID: Long = 0
+                        var eventID: Int = 0
                         val timestamp = System.currentTimeMillis()
                         val locationEntity = TraceLocation(eventID, latitude, longitude, timestamp)
                         GlobalScope.launch(Dispatchers.IO) {

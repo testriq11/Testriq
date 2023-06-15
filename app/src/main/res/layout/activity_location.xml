@@ -19,19 +19,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <fragment-->
+    <fragment
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+
+        tools:ignore="MissingConstraints"></fragment>
+
+    <Button
+        android:id="@+id/btnListAllLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:text="Click Here For All Location"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"></Button>
+
+<!--    <com.google.android.gms.maps.MapView-->
 <!--        android:id="@+id/mapView"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->
-<!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
-
-<!--        ></fragment>-->
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      />
+<!--      />-->
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/rvLocations"-->
