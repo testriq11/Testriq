@@ -13,7 +13,8 @@ import com.example.testriq.delete_userdefined_traces_module.DeleteTracesActivity
 import com.example.testriq.fakescreen_module.FakeScreenActivity
 import com.example.testriq.gps_module.GpsActivity
 import com.example.testriq.screen_capture_module.ScreenCaptureActivity
-import com.example.testriq.screen_capture_module.text_to_email.TextForwardEmailActivity
+import com.example.testriq.screen_capture_module.TestActivity
+import com.example.testriq.text_to_email.TextForwardEmailActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvscreenCapture.setOnClickListener  {
-            val intent= Intent(this,ScreenCaptureActivity::class.java)
+            val intent= Intent(this, TestActivity::class.java)
             startActivity(intent)
         }
 
@@ -163,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
             if (isChecked){
 
-                val intent= Intent(this,ScreenCaptureActivity::class.java)
+                val intent= Intent(this,TestActivity::class.java)
                 startActivity(intent)
             }
             else{

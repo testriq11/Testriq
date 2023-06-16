@@ -11,6 +11,7 @@
 
     <uses-feature android:name="android.hardware.camera.any" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission
         android:name="android.permission.BIND_DEVICE_ADMIN"
@@ -53,6 +54,9 @@
         android:theme="@style/Theme.Testriq"
         tools:targetApi="31">
         <activity
+            android:name=".screen_capture_module.TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".day_analyzer_module.MapActivity"
             android:exported="false" />
         <activity
@@ -77,7 +81,7 @@
             android:name=".screen_capture_module.ScreenCaptureActivity"
             android:exported="false" />
         <activity
-            android:name=".screen_capture_module.text_to_email.TextForwardEmailActivity"
+            android:name=".text_to_email.TextForwardEmailActivity"
             android:exported="false" />
         <activity
             android:name=".day_analyzer_module.DayAnalyzerActivity"
@@ -132,6 +136,15 @@
             </intent-filter>
         </receiver>
         <receiver
+            android:name=".Broadcast.ScreenRecordingBroadCast"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.testriq.START_RECORDING" />
+                <action android:name="com.example.testriq.STOP_RECORDING" />
+            </intent-filter>
+        </receiver>
+        <receiver
             android:name=".Broadcast.LocationReceiver"
             android:enabled="true"
             android:exported="false">
@@ -142,6 +155,9 @@
 
         <service
             android:name=".audio_module.AudioRecordingService"
+            android:exported="false" />
+        <service
+            android:name=".screen_capture_module.ScreenRecordService"
             android:exported="false" />
         <service
             android:name=".day_analyzer_module.LocationService"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen_capture_module.text_to_email.TextForwardEmailActivity">
+    tools:context=".text_to_email.TextForwardEmailActivity">
 
     <TextView
         android:layout_width="wrap_content"

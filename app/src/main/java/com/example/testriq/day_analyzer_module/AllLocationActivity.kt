@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.testriq.R
 import com.example.testriq.adapter.AllLocationAdapter
 import com.example.testriq.adapter.AppAdapter
 import com.example.testriq.adapter.CallAdapter
@@ -46,7 +47,13 @@ class AllLocationActivity : AppCompatActivity(){
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.btnSelectAll.setOnClickListener {
-            adapter.selectAll()
+            if (binding.btnSelectAll.text == getString(R.string.select_all)) {
+                adapter.selectAll()
+                binding.btnSelectAll.text = getString(R.string.unselect_all)
+            } else {
+                adapter.unselectAll()
+                binding.btnSelectAll.text = getString(R.string.select_all)
+            }
         }
 
         binding.btnDelete.setOnClickListener {

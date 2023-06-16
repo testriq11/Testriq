@@ -33,22 +33,20 @@ class AllLocationAdapter (private val context: Context, private val locationList
     private lateinit var locationDao: TraceLocationDao
     var selectedItems: BooleanArray = BooleanArray(locationList.size) { false }
 
-//    fun selectAll() {
-//        for (item in locationList) {
-//            item.isSelected = true
-//        }
-//        notifyDataSetChanged()
-//    }
-
-    fun selectAllItems() {
-        selectedItems = BooleanArray(locationList.size) { true }
+    fun selectAll() {
+        for (item in locationList) {
+            item.isSelected = true
+        }
         notifyDataSetChanged()
     }
 
-    fun unselectAllItems() {
-        selectedItems = BooleanArray(locationList.size) { false }
+    fun unselectAll() {
+        for (item in locationList) {
+            item.isSelected =false
+        }
         notifyDataSetChanged()
     }
+
 
     fun deleteSelectedTasks() {
 //        val selectedApps = installedApps.filter { it.isSelected }

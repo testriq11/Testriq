@@ -195,16 +195,16 @@ class AudioRecordingService : Service()  {
 //        const val START_RECORDING = "start_recording"
 //        const val STOP_RECORDING = "stop_recording"
 
-        fun newStartIntent(context: Context): Intent {
-            return Intent(context, AudioRecordingService::class.java).apply {
-                action = START_RECORDING_ACTION
+            fun newStartIntent(context: Context): Intent {
+                return Intent(context, AudioRecordingService::class.java).apply {
+                    action = START_RECORDING_ACTION
+                }
             }
-        }
 
-        fun newStopIntent(context: Context): Intent {
-            return Intent(context, AudioRecordingService::class.java).apply {
-                action = STOP_RECORDING_ACTION
+            fun newStopIntent(context: Context): Intent {
+                return Intent(context, AudioRecordingService::class.java).apply {
+                    action = STOP_RECORDING_ACTION
+                }
             }
-        }
     }
 }
