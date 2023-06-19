@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
             if (isChecked){
 
-                val intent= Intent(this,TestActivity::class.java)
+                val intent= Intent(this,ScreenCaptureActivity::class.java)
                 startActivity(intent)
             }
             else{

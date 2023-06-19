@@ -25,80 +25,38 @@ import java.util.*
 class TestActivity : AppCompatActivity() {
     private var mediaRecorder: MediaRecorder? = null
     private var isRecording = false
-    val context=this
-   var filePath=""
+    val context = this
+    var filePath = ""
     private lateinit var mediaProjectionManager: MediaProjectionManager
     private var mediaProjection: MediaProjection? = null
 
+
     lateinit var binding: ActivityTestBinding
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityTestBinding.inflate(layoutInflater)
+        binding = ActivityTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//
+        mediaProjectionManager =
+            getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 //        val intent = Intent(this, ScreenRecordService::class.java)
 //        ContextCompat.startForegroundService(this, intent)
-        val timestamp = LocalDateTime.now().toString().replace(":", "-")
-        val fileName = "ak$timestamp-${Random().nextInt(10000)}.mp4"
-
-        val folder = File(Environment.getExternalStorageDirectory(), "screen_record1")
-        if (!folder.exists()) {
-            folder.mkdirs()
-        }
-        val folderPath = folder.getAbsolutePath()
-        filePath = File(folderPath, fileName).toString()
-
-
-        // Initialize MediaProjectionManager
-
-
-        mediaProjectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-
-        // Initialize MediaRecorder
-        mediaRecorder = MediaRecorder()
-        mediaRecorder?.setVideoSource(MediaRecorder.VideoSource.SURFACE)
-        mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-        mediaRecorder?.setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-        mediaRecorder?.setVideoEncodingBitRate(512 * 1000)
-        mediaRecorder?.setVideoFrameRate(30)
-        mediaRecorder?.setVideoSize(1280, 720)
-        mediaRecorder?.setOutputFile(filePath)
-
 
 
         binding.btnStart.setOnClickListener {
 
-            if (!isRecording) {
-                startScreenRecording()
-//                requestScreenCapture()
-                binding.btnStart.text = "Stop Recording"
-            } else {
-                stopScreenRecording()
-                binding.btnStart.text = "Start Recording"
-            }
+            val serviceIntent = Intent(this, MediaProjectionService::class.java)
+            startService(serviceIntent)
 
-            Toast.makeText(this,"Start recording",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Start recording", Toast.LENGTH_LONG).show()
         }
 
-//        binding.btnStop.setOnClickListener {
-//            stopScreenRecording()
-//            Toast.makeText(this,"Stop recording",Toast.LENGTH_LONG).show()
-//        }
-    }
-
-    private fun startScreenRecording() {
-        val mediaProjectionIntent = mediaProjectionManager.createScreenCaptureIntent()
-        startActivityForResult(mediaProjectionIntent,11)
-        Toast.makeText(this,"Start recording",Toast.LENGTH_LONG).show()
-    }
-
-    private fun stopScreenRecording() {
-        mediaRecorder?.stop()
-        mediaRecorder?.reset()
-        mediaProjection?.stop()
-        mediaProjection = null
-        isRecording = false
+        binding.btnStop.setOnClickListener {
+            val serviceIntent1 = Intent(this, MediaProjectionService::class.java)
+          stopService(serviceIntent1)
+            Toast.makeText(this, "Stop recording", Toast.LENGTH_LONG).show()
+        }
     }
 
 

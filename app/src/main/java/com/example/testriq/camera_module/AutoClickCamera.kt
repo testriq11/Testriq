@@ -60,7 +60,7 @@ class AutoClickCamera : AppCompatActivity() {
 //    val clickRunnable = object : Runnable {
 //        private var count = 0
 
-        //        override fun run() {
+    //        override fun run() {
 //            if (count < binding.qtyImg.text.toString().toInt()-1) {
 //                binding.imgCaptureBtn.performClick()
 //                count++
@@ -77,7 +77,7 @@ class AutoClickCamera : AppCompatActivity() {
 //            }
 //        }
 
-//    }
+    //    }
     // Set the delay between each click (in milliseconds)
     private val delayInMillis = 8000L
     private val handler = Handler()
@@ -104,7 +104,11 @@ class AutoClickCamera : AppCompatActivity() {
         binding =ActivityAutoClickCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val endt = intent?.getStringExtra("datetimeEnd")
+        var endt = intent?.getStringExtra("datetimeEnd")
+        var startt = intent?.getStringExtra("datetime")
+//
+
+
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -149,7 +153,7 @@ class AutoClickCamera : AppCompatActivity() {
         startCamera()
 
         Log.e("myValue", endt.toString())
-
+        Log.e("myValueStart", startt.toString())
 
         val format = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
 
@@ -157,6 +161,15 @@ class AutoClickCamera : AppCompatActivity() {
         val dateTime = LocalDateTime.parse(endt, formatter)
         val zone = ZoneId.of("GMT+05:30")
         val zonedDateTime = dateTime.atZone(zone)
+
+        val dateFormat = SimpleDateFormat("E MMM dd HH:mm:ss z yyyy")
+        val startDate = dateFormat.parse(startt)
+        val endDate = dateFormat.parse(endt)
+        var differTime: Long =   endDate.time - startDate.time
+
+
+
+        Log.e("diff", differTime.toString())
 
         val triggerTime: Long = zonedDateTime.toEpochSecond() * 1000
         try {
@@ -290,7 +303,7 @@ class AutoClickCamera : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startAutoClick() {
 
-        takePhoto()
+//        takePhoto()
 
 //        handler.post(clickRunnable)
     }
@@ -336,10 +349,10 @@ class AutoClickCamera : AppCompatActivity() {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    takePhoto()
+//                Handler(Looper.getMainLooper()).postDelayed({
+                    takePhoto(50000, 60000/50000)
 
-                }, 30000)
+//                }, 10000)
                 Toast.makeText(context,"Image Saved in Folder",Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Log.d(TAG, "Use case binding failed")
@@ -353,36 +366,27 @@ class AutoClickCamera : AppCompatActivity() {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun takePhoto() {
+    private fun takePhoto(intervalMillis: Long, totalCaptures: Int) {
+        val timer = Timer()
+        var captureCount = 0
 
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                if (captureCount >= totalCaptures) {
+                    stopCapturingImages()
+                    return
+                }
 
+                val timestamp = LocalDateTime.now().toString().replace(":", "-")
+                val fileName = "img$timestamp-${Random().nextInt(10000)}.jpg"
+                val file = File(externalMediaDirs.first(), fileName)
+                val outputOptions = ImageCapture.OutputFileOptions.Builder(file).build()
 
-//            binding.imgCaptureBtn.performClick()
-        imageCapture?.let {
-//            val fileName = "JPEG_${System.currentTimeMillis()}"
-//            val file = File(externalMediaDirs[0], fileName)
-//            val file = File(
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-//                "i"
-//            )
-            val timestamp = LocalDateTime.now().toString().replace(":", "-")
-            val fileName = "img$timestamp-${Random().nextInt(10000)}.jpg"
-            val file = File(externalMediaDirs.first(), fileName)
-//
-            val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file).build()
-            it.takePicture(
-                outputFileOptions,
-                imgCaptureExecutor,
-                object : ImageCapture.OnImageSavedCallback {
+                imageCapture?.takePicture(outputOptions, ContextCompat.getMainExecutor(context), object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        saveImageToInternalStorage(context ,file.toUri())
-//var durartion=5000L
-////                                    Toast.makeText(this@MainActivity," Image Saved in Internal Storage",Toast.LENGTH_LONG).show()
-////                                  var Toast toast = Toast.makeText(context, "GAME OVER!\nScore: " + score, duration);
-//                         var toast= Toast.makeText(context, "Image SAved ",durartion)
-//                                    toast.show();
+                        // Image saved, handle accordingly
+                        saveImageToInternalStorage(context, file.toUri())
                         Log.i(TAG, "The image has been saved in ${file.toUri()}")
-
                     }
 
                     override fun onError(exception: ImageCaptureException) {
@@ -392,16 +396,66 @@ class AutoClickCamera : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                         Log.d(TAG, "Error taking photo:$exception")
-
-
+                        // Image capture failed, handle accordingly
                     }
-
-
-
-
                 })
-        }
 
+                captureCount++
+            }
+        }, 0, intervalMillis)
+
+
+//////////////////////////////////////////////////////////////////////////
+//            binding.imgCaptureBtn.performClick()
+// **       imageCapture?.let {
+//            val fileName = "JPEG_${System.currentTimeMillis()}"
+//            val file = File(externalMediaDirs[0], fileName)
+//            val file = File(
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+//                "i"
+//            )
+// **           for (i in 1..4) {
+//            val timestamp = LocalDateTime.now().toString().replace(":", "-")
+//            val fileName = "img$timestamp-${Random().nextInt(10000)}.jpg"
+//            val file = File(externalMediaDirs.first(), fileName)
+////
+//            val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file).build()
+//            it.takePicture(
+//                outputFileOptions,
+//                imgCaptureExecutor,
+//                object : ImageCapture.OnImageSavedCallback {
+//                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+//                        saveImageToInternalStorage(context, file.toUri())
+//var durartion=5000L
+////                                    Toast.makeText(this@MainActivity," Image Saved in Internal Storage",Toast.LENGTH_LONG).show()
+////                                  var Toast toast = Toast.makeText(context, "GAME OVER!\nScore: " + score, duration);
+//                         var toast= Toast.makeText(context, "Image SAved ",durartion)
+//                                    toast.show();
+//                        Log.i(TAG, "The image has been saved in ${file.toUri()}")
+//
+//                    }
+
+//                    override fun onError(exception: ImageCaptureException) {
+//                        Toast.makeText(
+//                            binding.root.context,
+//                            "Error taking photo",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                        Log.d(TAG, "Error taking photo:$exception")
+//
+//
+//                    }
+//
+//
+//                })
+//        }
+//    }
+ //////////////////////////////////////////       //////////////////////////////////////////
+    }
+    fun stopCapturingImages() {
+        val timer = Timer()
+        timer.cancel()
+        timer.purge()
     }
 
 //        imageCapture?.let {

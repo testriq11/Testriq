@@ -15,7 +15,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import com.example.testriq.Broadcast.AudioBroadCast
 import com.example.testriq.Broadcast.ScreenRecordingBroadCast
-import com.example.testriq.audio_module.AudioRecordingService
+
 import com.example.testriq.databinding.ActivityScreenCaptureBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,9 +63,7 @@ class ScreenCaptureActivity : AppCompatActivity() {
 //                setAlarmEnd(context,endDate)
             }
 
-            //            val intent = Intent(context, AudioRecordingService::class.java)
-//            context.startForegroundService(intent)
-            Toast.makeText(this,"Date & Time Scheduled", Toast.LENGTH_LONG).show()
+           Toast.makeText(this,"Date & Time Scheduled", Toast.LENGTH_LONG).show()
 
         }
 
@@ -178,7 +176,7 @@ class ScreenCaptureActivity : AppCompatActivity() {
         Log.e(" dateTimeEnd.time", dateTimeEnd.time.toString() )
 
 
-        val stopRecordingIntentService = Intent(ScreenRecordingBroadCast.STOP_RECORDING_ACTION)
+        val stopRecordingIntentService = Intent(ScreenRecordingBroadCast.STOP_SCREEN_RECORDING_ACTION)
         sendBroadcast(stopRecordingIntentService )
 
         val intent = Intent(this,ScreenRecordService::class.java)

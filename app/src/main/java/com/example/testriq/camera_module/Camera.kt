@@ -253,6 +253,7 @@ class Camera  : AppCompatActivity() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val startRecordingIntent = Intent(context, CameraAlarmReceiver::class.java).apply {
             action = "com.example.testriq.START_RECORDING"
+            putExtra("datetime",dateTime.toString())
             putExtra("datetimeEnd",dateTimeEnd.toString())
         }
 //        val startRecordingIntent = Intent(AudioBroadCast.START_RECORDING_ACTION)

@@ -22,10 +22,10 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import com.example.testriq.Broadcast.AudioBroadCast
+
 import com.example.testriq.Broadcast.ScreenRecordingBroadCast
 import com.example.testriq.R
-import com.example.testriq.audio_module.AudioRecordingService
+
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -33,6 +33,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 class ScreenRecordService : Service() {
+    var filePath=""
     private var mediaRecorder: MediaRecorder? = null
     private var isRecording = false
 
@@ -40,6 +41,7 @@ class ScreenRecordService : Service() {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (isRecording) {
             stopRecording()
@@ -49,16 +51,28 @@ class ScreenRecordService : Service() {
         return START_NOT_STICKY
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun startRecording() {
-        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val filePath = "${Environment.getExternalStorageDirectory().absolutePath}/$timestamp.mp4"
+//        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+//        val filePath = "${Environment.getExternalStorageDirectory().absolutePath}/$timestamp.mp4"
+
+        val timestamp = LocalDateTime.now().toString().replace(":", "-")
+        val fileName = "vid$timestamp-${Random().nextInt(10000)}.mp4"
+
+        val folder = File(Environment.getExternalStorageDirectory(), "screen_record")
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
+        val folderPath = folder.getAbsolutePath()
+        filePath = File(folderPath, fileName).toString()
 
         mediaRecorder = MediaRecorder().apply {
             setVideoSource(MediaRecorder.VideoSource.SURFACE)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setOutputFormat(MediaRecorder.OutputFormat.WEBM)
             setOutputFile(filePath)
-            setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-            setVideoEncodingBitRate(10000000)
+            setVideoEncoder(MediaRecorder.VideoEncoder.VP8)
+//            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB)
+            setVideoEncodingBitRate(512 * 1000)
             setVideoFrameRate(30)
             setVideoSize(1280, 720)
 
@@ -95,14 +109,14 @@ class ScreenRecordService : Service() {
 //        const val STOP_RECORDING = "stop_recording"
 
         fun newStartIntent(context: Context): Intent {
-            return Intent(context, AudioRecordingService::class.java).apply {
-                action = AudioBroadCast.START_RECORDING_ACTION
+            return Intent(context, ScreenRecordService::class.java).apply {
+                action = ScreenRecordingBroadCast.START_SCREEN_RECORDING_ACTION
             }
         }
 
         fun newStopIntent(context: Context): Intent {
-            return Intent(context, AudioRecordingService::class.java).apply {
-                action = AudioBroadCast.STOP_RECORDING_ACTION
+            return Intent(context, ScreenRecordService::class.java).apply {
+                action =  ScreenRecordingBroadCast.STOP_SCREEN_RECORDING_ACTION
             }
         }
     }

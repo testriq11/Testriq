@@ -6,6 +6,7 @@ import android.content.Intent
 import android.media.MediaRecorder
 import android.util.Log
 import android.widget.Toast
+import com.example.testriq.screen_capture_module.MediaProjectionService
 import com.example.testriq.screen_capture_module.ScreenRecordService
 
 import java.util.*
@@ -30,7 +31,7 @@ class ScreenRecordingBroadCast :BroadcastReceiver() {
 
         val action = intent?.action
 
-        if (action == ScreenRecordingBroadCast.START_RECORDING_ACTION) {
+        if (action == ScreenRecordingBroadCast.START_SCREEN_RECORDING_ACTION) {
             // Start recording audio
             val serviceIntent = ScreenRecordService.newStartIntent(context!!)
             context.startService(serviceIntent)
@@ -47,8 +48,8 @@ class ScreenRecordingBroadCast :BroadcastReceiver() {
     }
 
     companion object {
-        const val START_RECORDING_ACTION = "com.example.testriq.START_RECORDING"
-        const val STOP_RECORDING_ACTION = "com.example.testriq.STOP_RECORDING"
+        const val START_SCREEN_RECORDING_ACTION = "com.example.testriq.START_SCREEN_RECORDING"
+        const val STOP_SCREEN_RECORDING_ACTION = "com.example.testriq.STOP_SCREEN_RECORDING"
     }
 
 }
