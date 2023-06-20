@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Handler
 import com.example.testriq.MainActivity
 import com.example.testriq.camera_module.AutoClickCamera
+import com.example.testriq.camera_module.AutoClickCameraNew
 import com.example.testriq.day_analyzer_module.DayAnalyzerActivity
 
 class CameraAlarmReceiver : BroadcastReceiver()  {
@@ -19,7 +20,7 @@ class CameraAlarmReceiver : BroadcastReceiver()  {
         val myValue = intent?.getStringExtra("datetimeEnd")
         val myValueStart = intent?.getStringExtra("datetime")
 //        val interval=intent?.getStringExtra("interval")
-        val openIntent = Intent(context, AutoClickCamera::class.java)
+        val openIntent = Intent(context, AutoClickCameraNew::class.java)
         openIntent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         openIntent.putExtra("datetimeEnd",myValue)
         openIntent.putExtra("datetime",myValueStart)
