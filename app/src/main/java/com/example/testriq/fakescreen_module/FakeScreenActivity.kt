@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -13,8 +12,8 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcel
 import android.util.Log
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
@@ -27,6 +26,7 @@ import com.example.testriq.model.App
 
 class FakeScreenActivity : AppCompatActivity() {
     val context=this
+    val MAX_BUNDLE_SIZE = 300
     private val DEVICE_ADMIN_REQUEST_CODE = 1
     lateinit var binding: ActivityFakeScreenBinding
     private lateinit var appRecyclerView: RecyclerView
@@ -122,6 +122,26 @@ class FakeScreenActivity : AppCompatActivity() {
         iconDrawable.draw(canvas)
 
         return bitmap
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val bundleSize = getBundleSize(outState)
+        if (bundleSize > MAX_BUNDLE_SIZE * 1024) {
+            outState.clear()
+        }
+    }
+    private fun getBundleSize(bundle: Bundle): Long {
+        val dataSize: Long
+        val obtain = Parcel.obtain()
+        dataSize = try {
+            obtain.writeBundle(bundle)
+            obtain.dataSize().toLong()
+        } finally {
+            obtain.recycle()
+        }
+        return dataSize
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
